@@ -1,4 +1,4 @@
-﻿namespace InvestmentTracker.Core;
+﻿namespace InvestmentTracker.Core.Pocos;
 
 public class Result
 {

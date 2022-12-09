@@ -1,11 +1,22 @@
-﻿using static System.Console;
+﻿using InvestmentTracker.Core;
+using InvestmentTracker.Core.Pocos;
+using static System.Console;
 
 namespace InvestmentTracker.Console;
 
 public class Program
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
-        WriteLine("Hello, World!");
+        var configuration = System.Text.Json.JsonSerializer.Deserialize<List<InvestmentConfiguration>>(File.ReadAllText("configuration.json"));
+
+        var scraper = new Scraper(configuration);
+
+        var results = scraper.GetPrices();
+
+        foreach (var result in results)
+        {
+            WriteLine($"{result.Id}: {result.Price}");
+        }
     }
 }
